@@ -1,1 +1,4 @@
 # Travel-Blog-Customer-Segmentation
+*
+*
+*
