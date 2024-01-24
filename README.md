@@ -39,12 +39,9 @@ In this repository, you will find the raw user activity data from Dilan's blog s
 - The topic column includes 6 different values (Africa, Europe, South America, North America, Australia, Asia).
 - The course price column includes two values (8 and 80).
 
-## Getting Started
+## Google Data Studio Riport
 
-To explore and analyze the dataset, download the provided CSV file. You can use various data analysis tools, such as Python with Pandas, R, or any other tool of your preference.
 
-## Suggestions and Contributions
-
-Feel free to explore the data, analyze it, and contribute to the project. If you have any suggestions or improvements, please open an issue or submit a pull request.
+## Suggestions
 
 Let's uncover valuable insights to enhance Dilan's travel blog business!
