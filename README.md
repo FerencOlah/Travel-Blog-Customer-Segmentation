@@ -41,6 +41,7 @@ In this repository, you will find the raw user activity data from Dilan's blog s
 
 ## Google Data Studio Riport
 
+https://lookerstudio.google.com/reporting/67433a18-29f3-4214-bedc-8d87c277b2c0
 
 ## Suggestions
 
