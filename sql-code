@@ -1,0 +1,125 @@
+-- lists -- 
+SELECT COUNT(*) FROM first_time_reader;
+SELECT COUNT (DISTINCT user_id) from first_time_reader;
+SELECT COUNT(*) FROM returning_reader;
+SELECT COUNT (DISTINCT user_id) from returning_reader;
+SELECT COUNT(*) FROM subscriber;
+SELECT COUNT (DISTINCT user_id) from subscriber;
+SELECT COUNT(*) FROM purchase;
+SELECT COUNT (DISTINCT user_id) from purchase;
+
+
+-- first_time_reader -- 210023 -- 
+SELECT COUNT (DISTINCT user_id) from first_time_reader;
+
+SELECT event_type, COUNT(*) FROM first_time_reader GROUP BY event_type ORDER BY event_type;
+SELECT country, COUNT(*) FROM first_time_reader GROUP BY country ORDER BY country;
+SELECT topic, COUNT(*) FROM first_time_reader GROUP BY topic ORDER BY topic;
+
+-- first_time_reader source and topic -- 
+
+SELECT event_type,country,source,topic, COUNT(*)
+FROM first_time_reader
+GROUP BY event_type,country,source,topic
+ORDER BY count;
+
+-- returning_reader -- 66231 -- 31.5% -- 
+SELECT COUNT (DISTINCT user_id) from returning_reader;
+SELECT country, COUNT(*) FROM returning_reader GROUP BY country ORDER BY country;
+SELECT country, COUNT(DISTINCT user_id) FROM returning_reader GROUP BY country ORDER BY country;
+SELECT user_id, COUNT(*) FROM returning_reader GROUP BY user_id ORDER BY user_id;
+
+-- subscriber -- 7618 -- 
+SELECT COUNT (DISTINCT user_id) from subscriber;
+
+-- purchase -- 
+SELECT COUNT (DISTINCT user_id) from purchase;
+SELECT user_id, COUNT(*) FROM purchase GROUP BY user_id ORDER BY user_id;
+
+-- purchase by topic and country -- 
+
+SELECT count(distinct(returning_reader.user_id)),purchase.price, returning_reader.topic,returning_reader.country
+FROM purchase
+INNER JOIN returning_reader ON purchase.user_id = returning_reader.user_id
+group by purchase.price, returning_reader.topic,returning_reader.country;
+
+--- Total order / user --
+SELECT user_id,
+  SUM(price) AS total_order
+FROM purchase
+GROUP BY user_id
+ORDER BY SUM(price) DESC;
+
+-- 8x6640 -- 1767x80 --  
+SELECT COUNT(user_id), price
+FROM purchase
+GROUP BY price
+HAVING COUNT(price) = 8;
+
+SELECT COUNT (user_id)
+FROM purchase
+WHERE EXISTS
+(SELECT price FROM purchase WHERE price=80);
+
+SELECT SUM(price) ,user_id
+FROM purchase
+INNER JOIN user_id on purchase.user_id = purchase.user_id
+group by price,purchase.user_id;
+
+-- AVG 23.13
+SELECT avg(price)
+FROM purchase
+WHERE price>0;
+
+-- 8x6640 -- 1767x80 --  
+
+SELECT price, COUNT(*) FROM purchase GROUP BY price ORDER BY price;
+
+---- Total order by source and country--
+
+SELECT price,country,first_time_reader.source, COUNT(*)as TOTAL
+FROM purchase
+inner JOIN first_time_reader
+ON first_time_reader.user_id = purchase.user_id
+GROUP BY price,country,first_time_reader.source ORDER BY total desc;
+
+---- Total revenue by source and country *price--
+
+SELECT price,country,first_time_reader.source, COUNT(*)*price as TOTAL
+FROM purchase
+inner JOIN first_time_reader
+ON first_time_reader.user_id = purchase.user_id
+GROUP BY price,country,first_time_reader.source ORDER BY total desc;
+
+-- Total revenue only for country 5 and price = 80
+
+SELECT country,first_time_reader.source,first_time_reader.topic, COUNT(*)*price as Total_Income
+FROM purchase
+JOIN first_time_reader
+ON first_time_reader.user_id = purchase.user_id
+where country='country_5' and price=80
+GROUP BY price,country,first_time_reader.source,first_time_reader.topic order by Total_Income desc; 
+
+-- total revenue -- all month (3) 
+
+SELECT SUM(price) AS total_revenue 
+FROM purchase
+WHERE dateandtime >= '2018-01-01' AND dateandtime < '2018-04-01';
+
+-- total revenue -- 1. month 
+
+SELECT SUM(price) AS total_revenue 
+FROM purchase
+WHERE dateandtime >= '2018-01-01' AND dateandtime < '2018-02-01';
+
+-- total revenue -- 2. month 
+
+SELECT SUM(price) AS total_revenue 
+FROM purchase
+WHERE dateandtime >= '2018-02-01' AND dateandtime < '2018-03-01';
+
+-- total revenue -- 3. month 
+
+SELECT SUM(price) AS total_revenue 
+FROM purchase
+WHERE dateandtime >= '2018-03-01' AND dateandtime < '2018-04-01';
