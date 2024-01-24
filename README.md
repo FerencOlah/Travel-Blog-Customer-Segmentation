@@ -1,42 +1,50 @@
-In this data set, you will find the raw user activity data from Dilan's blog between 1 January 2018 and 31 March 2018. It's a log with ~600.000 rows. The format is similar to what you had at Send-A-Tree but there are important differences.
+# Dilan's Travel Blog Analysis
 
+## Aim of the Project
 
-The whole data log is one big file. You don't have to worry about automation and refreshing the data.
-This is the .csv file. The field separator is a semi-colon (;).
-The first column is the date and the time of the event, in this format: YYYY-MM-DD HH:MM:SS (eg. 2018-03-30 23:48:48).
-The second column is the event type. There are three different event types:
-read
-subscribe
-buy
-The rest of the columns depend on the event type:
-For read there are two options:
-If this is the first visit from the given user, then the next fields are: country; user_id; source; topic
-If it's a returning reader, then these are the fields: country; user_id; topic
-For subscribe there is only one additional column: user_id
-For buy there are two more columns: user_id and the price of the product the user bought.
-Examples for each event types:
-First time reader: 2018-03-30 23:59:56;read;country_5;2458361283;Reddit;Asia
-Returning reader: 2018-03-31 05:04:50;read;country_4;2458361208;Africa
-Subscriber: 2018-03-30 23:48:48;subscribe;2458173588
-Purchase: 2018-03-30 23:11:30;buy;2458339835;80
-Find out more by downloading and exploring the data set by yourself.
-The country column has 8 different values:
-country_1
-country_2
-country_3
-...
-country_8
-The source column has 3 different values:
-Reddit
-AdWords
-SEO
-The topic column:
-Africa
-Europe
-South America
-North America
-Australia
-Asia
-The course price column:
-8
-80
+This project aims to conduct a comprehensive analysis and interpretation of the main business metrics for Dilan's travel blog. By delving into the raw user activity data, we will create a funnel to understand the blog's user behavior. Key aspects of the analysis include subscriber and revenue regression with forecasting, ultimately providing actionable suggestions for the business.
+
+## Data Set Overview
+
+In this repository, you will find the raw user activity data from Dilan's blog spanning from January 1, 2018, to March 31, 2018. The dataset comprises approximately 600,000 rows, capturing various user interactions. The dataset is available in CSV format, with a semicolon (`;`) serving as the field separator.
+
+### Data Columns
+
+1. **Date and Time:** The first column represents the date and time of the event in the format `YYYY-MM-DD HH:MM:SS`.
+
+2. **Event Type:** The second column indicates the type of event, categorized into three types: `read`, `subscribe`, and `buy`.
+
+    - For `read` events:
+        - First-time reader fields: `country`, `user_id`, `source`, `topic`
+        - Returning reader fields: `country`, `user_id`, `topic`
+        
+    - For `subscribe` events:
+        - One additional column: `user_id`
+        
+    - For `buy` events:
+        - Two additional columns: `user_id` and `price` of the purchased product.
+
+### Examples
+
+- First-time reader: `2018-03-30 23:59:56;read;country_5;2458361283;Reddit;Asia`
+- Returning reader: `2018-03-31 05:04:50;read;country_4;2458361208;Africa`
+- Subscriber: `2018-03-30 23:48:48;subscribe;2458173588`
+- Purchase: `2018-03-30 23:11:30;buy;2458339835;80`
+
+### Additional Details
+
+- The dataset is a single, unsegmented file, eliminating the need for automation and data refreshing.
+- The country column has 8 different values (country_1 to country_8).
+- The source column has 3 different values (Reddit, AdWords, SEO).
+- The topic column includes 6 different values (Africa, Europe, South America, North America, Australia, Asia).
+- The course price column includes two values (8 and 80).
+
+## Getting Started
+
+To explore and analyze the dataset, download the provided CSV file. You can use various data analysis tools, such as Python with Pandas, R, or any other tool of your preference.
+
+## Suggestions and Contributions
+
+Feel free to explore the data, analyze it, and contribute to the project. If you have any suggestions or improvements, please open an issue or submit a pull request.
+
+Let's uncover valuable insights to enhance Dilan's travel blog business!
